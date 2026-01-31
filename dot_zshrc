@@ -116,9 +116,12 @@ alias l='ls'
 alias ll='ls -a'
 alias lll='ls -la'
 
-export IDEA="/home/anand/.local/share/JetBrains/Toolbox/apps/intellij-idea"
+export IDEA="/home/anand/.local/share/JetBrains/idea-IU-253.30387.90" 
 export PATH="$IDEA/bin:$PATH"
 
+export DENO="/home/anand/.deno"
+export PATH="$DENO/bin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+. "/home/anand/.deno/env"
