@@ -77,7 +77,12 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-autosuggestions zsh-syntax-highlighting)
+#plugins=(zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(
+  zsh-autosuggestions   
+  fast-syntax-highlighting
+  zsh-autocomplete 
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -111,10 +116,19 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias sudo='sudo '
 alias vim='nvim'
-alias ls='lsd'
+#alias ls='lsd'
+alias ls='eza --icons --git --header --group-directories-first --color-scale --time-style=long-iso'
 alias l='ls'
 alias ll='ls -a'
 alias lll='ls -la'
+
+# Set Vim as the default editor for sudoedit and git
+export EDITOR=nvim
+
+# Disable Zsh internal history saving
+unset HISTFILE
+HISTSIZE=0
+SAVEHIST=0
 
 export IDEA="/home/anand/.local/share/JetBrains/idea-IU-253.30387.90" 
 export PATH="$IDEA/bin:$PATH"
@@ -125,3 +139,8 @@ export PATH="$DENO/bin:$PATH"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 . "/home/anand/.deno/env"
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"
+eval "$(zoxide init zsh)"
