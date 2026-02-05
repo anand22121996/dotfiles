@@ -34,30 +34,28 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light marlonrichert/zsh-autocomplete
 
 # Custom Alias
-alias sudo='sudo '
-alias vim='nvim'
-#alias ls='lsd'
-alias ls='eza --icons --git --header --group-directories-first --color-scale --time-style=long-iso'
-alias l='ls'
-alias ll='ls -a'
-alias lll='ls -la'
+# alias sudo='sudo '
+# alias vim='nvim'
+# alias ls='eza --icons --git --header --group-directories-first --color-scale --time-style=long-iso'
+# alias l='ls'
+# alias ll='ls -a'
+# alias lll='ls -la'
 
 # Set Vim as the default editor for sudoedit and git
-export EDITOR=nvim
+#export EDITOR=nvim
+#export VISUAL=nvim
 
 # Disable Zsh internal history saving
 unset HISTFILE
 HISTSIZE=0
 SAVEHIST=0
 
-export IDEA="/home/anand/.local/share/JetBrains/idea-IU-253.30387.90" 
-export PATH="$IDEA/bin:$PATH"
-
-export DENO="/home/anand/.deno"
-export PATH="$DENO/bin:$PATH"
+# export IDEA="/home/anand/.local/share/JetBrains/idea-IU-253.30387.90" 
+# export PATH="$IDEA/bin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 . "/home/anand/.deno/env"
 
 . "$HOME/.atuin/bin/env"
