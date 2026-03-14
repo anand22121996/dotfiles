@@ -41,6 +41,16 @@ zinit light marlonrichert/zsh-autocomplete
 # alias ll='ls -a'
 # alias lll='ls -la'
 
+# Open buffer line in editor
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
+
+# do history expansion on space
+bindkey " " magic-space 
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
+bindkey "^[[3~" delete-char
 # Set Vim as the default editor for sudoedit and git
 #export EDITOR=nvim
 #export VISUAL=nvim
@@ -61,7 +71,7 @@ SAVEHIST=0
 . "$HOME/.atuin/bin/env"
 
 eval "$(atuin init zsh)"
-eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh --cmd cd)"
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)

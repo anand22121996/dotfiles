@@ -23,13 +23,13 @@
 # timezone = "local"
 
 ## enable or disable automatic sync
-# auto_sync = true
+auto_sync = false
 
 ## enable or disable automatic update checks
 # update_check = true
 
 ## address of the sync server
-# sync_address = "https://api.atuin.sh"
+ sync_address = "http://192.168.1.12:8888"
 
 ## how often to sync history. note that this is only triggered when a command
 ## is ran, so sync intervals may well be longer
@@ -43,7 +43,7 @@
 ## which filter mode to use by default
 ## possible values: "global", "host", "session", "session-preload", "directory", "workspace"
 ## consider using search.filters to customize the enablement and order of filter modes
-# filter_mode = "global"
+ filter_mode = "global"
 
 ## With workspace filtering enabled, Atuin will filter for commands executed
 ## in any directory within a git repository tree (default: false).
@@ -107,13 +107,15 @@
 ## default history list format - can also be specified with the --format arg
 # history_format = "{time}\t{command}\t{duration}"
 
+
 ## prevent commands matching any of these regexes from being written to history.
 ## Note that these regular expressions are unanchored, i.e. if they don't start
 ## with ^ or end with $, they'll match anywhere in the command.
 ## For details on the supported regular expression syntax, see
 ## https://docs.rs/regex/latest/regex/#syntax
 history_filter = [
-  "^\\s*(clear|ls|l|ll|lll|vim|nvim)\\s*$",
+  "^\\s*(clear|ls|l|ll|lll|vim|nvim|btop)\\s*$",
+  "^\\s*(cd|cdi|cd\\s+\\-|cd\\s+\\.\\.)\\s*$",
 ]
 
 ## prevent commands run with cwd matching any of these regexes from being written
@@ -272,7 +274,7 @@ enabled = true
 ## The port that should be used for TCP on non unix systems
 # tcp_port = 8889
 
-# [theme]
+[theme]
 ## Color theme to use for rendering in the terminal.
 ## There are some built-in themes, including the base theme ("default"),
 ## "autumn" and "marine". You can add your own themes to the "./themes" subdirectory of your
@@ -282,7 +284,7 @@ enabled = true
 ##    https://ogeon.github.io/docs/palette/master/palette/named/index.html
 ## If you provide a custom theme file, it should be  called "NAME.toml" and the theme below
 ## should be the stem, i.e. `theme = "NAME"` for your chosen NAME.
-# name = "autumn"
+name = "marine"
 
 ## Whether the theme manager should output normal or extra information to help fix themes.
 ## Boolean, true or false. If unset, left up to the theme manager.
