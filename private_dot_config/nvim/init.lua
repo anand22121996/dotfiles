@@ -11,3 +11,4 @@ vim.opt.shiftwidth = 4              -- Indentation width
 vim.opt.expandtab = true            -- Convert tabs to spaces
 vim.opt.termguicolors = true        -- Better color support for modern terminals
 vim.opt.undofile = true             -- Persistent undo history
+vim.opt.virtualedit = "block"       -- Allow virtual editing in only Virtual Mode
