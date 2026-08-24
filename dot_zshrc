@@ -10,6 +10,7 @@ source ~/.local/share/zinit/zinit.git/zinit.zsh
 zinit ice depth=1
 zinit light romkatv/powerlevel10k
 
+# Powerlevel10k instant prompt (recommended)
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -18,37 +19,59 @@ fi
 autoload -Uz compinit
 compinit
 
+# Optional: better completion menu
 zstyle ':completion:*' menu select
 
 ### -------- Plugins --------
+
+# Fast Syntax Highlighting
 zinit light zdharma-continuum/fast-syntax-highlighting
+
+# Autosuggestions
 zinit light zsh-users/zsh-autosuggestions
+
+# Autocomplete (must load AFTER compinit stuff)
 zinit light marlonrichert/zsh-autocomplete
 
-### -------- Atuin --------
-. "$HOME/.atuin/bin/env"
-
-eval "$(atuin init zsh)"
-
-### -------- ZLE --------
+# Open buffer line in editor
 autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
-bindkey " " magic-space
+# do history expansion on space
+bindkey " " magic-space 
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey "^[[3~" delete-char
 
-### -------- Other --------
+# Remove '/' from word characters so Alt+f stops at path slashes (.config/)
+WORDCHARS=${WORDCHARS//[\/]}
+
+# Bind Alt+f to forward-word for partial suggestion accept
+bindkey '^I' forward-word
+
+# Disable Zsh internal history saving
+unset HISTFILE
+HISTSIZE=0
+SAVEHIST=0
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 . "/home/anand/.deno/env"
 
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"
 eval "$(zoxide init zsh --cmd cd)"
 
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
 zinit light-mode for \
     zdharma-continuum/zinit-annex-as-monitor \
     zdharma-continuum/zinit-annex-bin-gem-node \
     zdharma-continuum/zinit-annex-patch-dl \
     zdharma-continuum/zinit-annex-rust
+
+### End of Zinit's installer chunk
+### End of Zinit's installer chunk

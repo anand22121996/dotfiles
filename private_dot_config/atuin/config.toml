@@ -105,6 +105,7 @@ autostart = true
 ## windows: Not Supported
 # socket_path = "~/.local/share/atuin/atuin.sock"
 
+
 [theme]
 ## Color theme to use for rendering in the terminal.
 ## There are some built-in themes, including the base theme ("default"),
@@ -128,3 +129,6 @@ name = "marine"
 # filters = [ "global", "host", "session", "session-preload", "workspace", "directory" ]
 
 [ui]
+
+[ai]
+enabled = false
