@@ -15,6 +15,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"
+
 ### -------- Completion Setup --------
 autoload -Uz compinit
 compinit
@@ -22,8 +27,34 @@ compinit
 # Optional: better completion menu
 zstyle ':completion:*' menu no
 
+# Color files/directories in the fzf-tab candidate list
+# using LS_COLORS.
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# Show completion descriptions/groups.
+# IMPORTANT: don't put %F{} color escapes here;
+# fzf-tab uses this format to detect groups.
+zstyle ':completion:*:descriptions' format '[%d]'
+
+# Include hidden files/directories
+#setopt globdots
+
 ### -------- Plugins --------
 zinit light Aloxaf/fzf-tab
+
+# fzf-tab configuration
+zstyle ':fzf-tab:*' fzf-command fzf
+zstyle ':fzf-tab:*' switch-group '<' '>'
+zstyle ':fzf-tab:*' fzf-flags '--height=60%' '--layout=reverse' '--border'
+
+# File/directory preview
+zstyle ':fzf-tab:complete:*:*' fzf-preview '
+    if [[ -d "$realpath" ]]; then
+        eza --all --tree --level=2 --color=always --icons=always "$realpath" 2>/dev/null
+    elif [[ -f "$realpath" ]]; then
+        bat --color=always --style=numbers --line-range=:300 "$realpath" 2>/dev/null
+   fi
+'
 
 # Fast Syntax Highlighting
 zinit light zdharma-continuum/fast-syntax-highlighting
@@ -45,6 +76,9 @@ bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey "^[[3~" delete-char
 
+#enable vi mode in zsh
+bindkey -v
+
 # Remove '/' from word characters so Alt+f stops at path slashes (.config/)
 WORDCHARS=${WORDCHARS//[\/]}
 
@@ -61,9 +95,6 @@ SAVEHIST=0
 
 . "/home/anand/.deno/env"
 
-. "$HOME/.atuin/bin/env"
-
-eval "$(atuin init zsh)"
 eval "$(zoxide init zsh --cmd cd)"
 
 # Load a few important annexes, without Turbo
@@ -76,3 +107,5 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 ### End of Zinit's installer chunk
+stty -ixon
+bindkey -r "^S"

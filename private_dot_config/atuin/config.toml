@@ -71,8 +71,8 @@ search_mode = "daemon-fuzzy"
 records = true
 
 
-[dotfiles]
 # Enable dotfiles
+[dotfiles]
 enabled = true
 
 [preview]
